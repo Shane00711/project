@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Crazy-8 Card Game" />
+    
+    <StackLayout class="p-4">
+        <StackLayout visibility="{{ !gameStarted ? 'visible' : 'collapsed' }}">
+            <Label text="Welcome to Crazy-8!" class="text-2xl text-center mb-4" />
+            <Button text="Create Game" tap="{{ createGame }}" class="mb-2" />
+            <Button text="Join Game" tap="{{ showJoinDialog }}" class="mb-2" />
+        </StackLayout>
+
+        <StackLayout visibility="{{ gameStarted ? 'visible' : 'collapsed' }}">
+            <Label text="{{ 'Current Player: ' + currentPlayer.name }}" class="text-xl mb-2" />
+            <Label text="{{ 'Time Remaining: ' + timeRemaining + 's' }}" class="text-lg mb-2" />
+            <Image src="{{ topCard.imageUrl }}" class="w-24 h-32 mb-4" />
+            
+            <ListView items="{{ currentPlayer.cards }}" class="h-32">
+                <ListView.itemTemplate>
+                    <StackLayout orientation="horizontal">
+                        <Image src="{{ imageUrl }}" class="w-16 h-24" tap="{{ $parent.playCard }}" />
+                    </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
+
+            <Button text="Draw Card" tap="{{ drawCard }}" class="mt-4" />
+        </StackLayout>
+    </StackLayout>
+</Page>
